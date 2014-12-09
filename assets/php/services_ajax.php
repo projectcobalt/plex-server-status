@@ -13,7 +13,7 @@
 	        });
 	</script>
 <?php 
-$sabnzbdXML = simplexml_load_file('http://sab.mike-d82.com/api?mode=f6102a3e1c4e40177d9e6b0e5b8d8f8d='.$sabnzbd_api);
+$sabnzbdXML = simplexml_load_file('http://sab.mike-d82.com/api?mode=qstatus&output=xml&apikey='.$sabnzbd_api);
 
 if (($sabnzbdXML->state) == 'Downloading'):
 	$timeleft = $sabnzbdXML->timeleft;
