@@ -25,7 +25,7 @@ endif;
 $services = array(
 	new service("Plex", 32400, "http://mike-d82.com:32400/web/index.html#!/dashboard"),
 	new service("pfSense", 80, "https://mike-d82.com", "mike-d82.com"),
-	new serviceSAB($sabTitle, 7878, "http://mike-d82.com:7878", "127.0.0.1:7878"),
+	new serviceSAB($sabTitle, 80, "http://sab.mike-d82.com"),
 	new service("NZBDrone", 80, "http://NZB.mike-d82.com"),
 	new service("CouchPotato", 80, "http://cp.mike-d82.com"),
 	#new service("Transmission", 9091, "http://d4rk.co:9091"),
