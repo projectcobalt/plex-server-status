@@ -13,7 +13,7 @@
 	        });
 	</script>
 <?php 
-$sabnzbdXML = simplexml_load_file('http://sab.mike-d82.com/api?mode=qstatus&output=xml&apikey='.$sabnzbd_api);
+$sabnzbdXML = simplexml_load_file('http://'.$sab_server_ip.'/api?mode=qstatus&output=xml&apikey='.$sabnzbd_api);
 
 if (($sabnzbdXML->state) == 'Downloading'):
 	$timeleft = $sabnzbdXML->timeleft;
@@ -23,13 +23,13 @@ else:
 endif;
 
 $services = array(
-	new service("Plex", 32400, "http://mike-d82.com:32400/web/index.html#!/dashboard"),
-	new service("pfSense", 80, "https://mike-d82.com", "mike-d82.com"),
-	new serviceSAB($sabTitle, 80, "http://sab.mike-d82.com"),
-	new service("NZBDrone", 80, "http://NZB.mike-d82.com"),
-	new service("CouchPotato", 80, "http://cp.mike-d82.com"),
+	new service("Plex", 32400, "http://"'.plex_server_ip.'"/web/index.html#!/dashboard"),
+	new service("pfSense", 80, "https://'.$pf_server_ip.'", $pf_server_ip),
+	new serviceSAB($sabTitle, 80, "http://'.$sab_server_ip.'"),
+	new service("NZBDrone", 80, "http://'.$nzb_server_ip.'"),
+	new service("CouchPotato", 80, "http://'.$cp_server_ip.'"),
 	#new service("Transmission", 9091, "http://d4rk.co:9091"),
-	new service("Subsonic",80, "http://mad.mike-d82.com")
+	new service("Madsonic",80, "http://'.$mad_server_ip.'")
 	
 );
 ?>
