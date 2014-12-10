@@ -15,13 +15,15 @@ class serviceSAB
 		$this->host = $host;
 		
 		$this->status = $this->check_port();
-		echo $this->check_port() > /tmp/test.txt;
+
 	}
 	
 	function check_port()
 	{
 		$conn = @fsockopen($this->host, $this->port, $errno, $errstr, 0.5);
 		if ($conn) 
+		echo $errno >/tmp/test.txt;
+		echo $errstr >/tmp/test.txt;
 		{
 			fclose($conn);
 			return true;
