@@ -605,7 +605,7 @@ function getBandwidth()
 		if ($output[$i] == '') unset ($output[$i]);
 	}
 	$output = array_values($output);
-	file_put_contents(/tmp/test.txt, $output);
+	file_put_contents('/tmp/test.txt', $output);
 	$rxRate = $output[51];
 	$rxFormat = $output[53];
 	$txRate = $output[57];
