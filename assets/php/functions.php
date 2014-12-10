@@ -33,15 +33,15 @@
 	$filesystems = $config['filesystems'];
 
 	// Set the path for the Plex Token
-$plexTokenCache = '../misc/plex_token.txt';
+//$plexTokenCache = '../misc/plex_token.txt';
 // Check to see if the plex token exists and is younger than one week
 // if not grab it and write it to our caches folder
-if (file_exists($plexTokenCache) && (filemtime($plexTokenCache) > (time() - 60 * 60 * 24 * 7))) {
-	$plexToken = file_get_contents("../misc/plex_token.txt");
-} else {
-	file_put_contents($plexTokenCache, getPlexToken());
-	$plexToken = file_get_contents("../misc/plex_token.txt");
-}
+//if (file_exists($plexTokenCache) && (filemtime($plexTokenCache) > (time() - 60 * 60 * 24 * 7))) {
+//	$plexToken = file_get_contents("../misc/plex_token.txt");
+//} else {
+//	file_put_contents($plexTokenCache, getPlexToken());
+//	$plexToken = file_get_contents("../misc/plex_token.txt");
+//}
 	
 
 if (strpos(strtolower(PHP_OS), "Darwin") === false)
@@ -146,7 +146,11 @@ function getDiskspaceUsed($dir)
 
 function zpoolHealth($name) //returns status of provided zpool
 {
-	$zpool = shell_exec('/sbin/zpool status '.$name);
+	$ssh = new Net_SSH2($nas_server_ip,$nas_port);
+	if (!$ssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
+		exit('Login Failed');
+	}
+	$zpool = ssh_exec('/sbin/zpool status '.$name);
         $findme = 'state:';
         $stateStart = strpos($zpool, $findme);
         $health = (substr($zpool, $stateStart + 7, 8)); // GB
