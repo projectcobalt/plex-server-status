@@ -599,7 +599,7 @@ function getBandwidth()
 		exit('Login Failed');
 	}
 
-	$dump = $ssh->exec('vnstat -i '.$pfsense_if_name.' -tr');
+	$dump = $ssh->exec('/usr/local/bin/vnstat -i '.$pfsense_if_name.' -tr');
 	$output = preg_split('/[\.|\s]/', $dump);
 	for ($i=count($output)-1; $i>=0; $i--) {
 		if ($output[$i] == '') unset ($output[$i]);
