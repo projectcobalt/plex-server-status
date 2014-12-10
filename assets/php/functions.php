@@ -611,9 +611,9 @@ function getBandwidth()
 	$txRate = $output[57];
 	$txFormat = $output[59];
 	file_put_contents('/tmp/test.txt', $output[51]);
-	file_put_contents('/tmp/test.txt', $output[53]);
-	file_put_contents('/tmp/test.txt', $output[57]);
-	file_put_contents('/tmp/test.txt', $output[59]);
+	file_put_contents('/tmp/test1.txt', $output[53]);
+	file_put_contents('/tmp/test2.txt', $output[57]);
+	file_put_contents('/tmp/test3.txt', $output[59]);
 	if ($rxFormat == 'kbit/s') {
 		$rxRateMB = $rxRate / 1024;
 	} else {
