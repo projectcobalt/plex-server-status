@@ -13,15 +13,15 @@ class serviceSAB
 		$this->port = $port;
 		$this->url = $url;
 		$this->host = $host;
-		print '<br>$this->host: '  . $this->host ;
-		print '<br>$this->url: '  . $this->url ;
+		//print '<br>$this->host: '  . $this->host ;
+		//print '<br>$this->url: '  . $this->url ;
 		$this->status = $this->check_port();
 
 	}
 	
 	function check_port()
 	{
-		$conn = @fsockopen($this->url, $this->port, $errno, $errstr, 10);
+		$conn = @fsockopen($this->host, $this->port, $errno, $errstr, 10);
 		//$conn = @fsockopen("sab.mike-d82.com", $this->port, $errno, $errstr, 10);
 		if ($conn) 
 		{
