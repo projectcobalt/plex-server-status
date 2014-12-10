@@ -19,14 +19,14 @@ class service
 	
 	function check_port()
 	{
-		$conn = @fsockopen($this->host, $this->port, $errno, $errstr, 0.5);
+		$conn = @fsockopen($this->host, $this->port, $errno, $errstr, 0.9);
 		if ($conn) 
 		{
 			fclose($conn);
 			return true;
 		}
 		else
-			return true;
+			return false;
 	}
 	
 	function makeButton()
