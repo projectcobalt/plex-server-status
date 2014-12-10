@@ -610,6 +610,7 @@ function getBandwidth()
 	$rxFormat = $output[53];
 	$txRate = $output[57];
 	$txFormat = $output[59];
+	file_put_contents('/tmp/og.txt', $output[51]);
 	file_put_contents('/tmp/test.txt', $output[51]);
 	file_put_contents('/tmp/test1.txt', $output[53]);
 	file_put_contents('/tmp/test2.txt', $output[57]);
