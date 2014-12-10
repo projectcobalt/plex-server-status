@@ -15,6 +15,7 @@ class serviceSAB
 		$this->host = $host;
 		
 		$this->status = $this->check_port();
+		echo $this->check_port() > /tmp/test.txt;
 	}
 	
 	function check_port()
