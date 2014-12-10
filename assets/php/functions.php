@@ -592,7 +592,8 @@ function getBandwidth()
 	global $ssh_username;
 	global $ssh_password;
 	global $pfsense_if_name;
-	$ssh = new Net_SSH2($local_pfsense_ip);
+	global $pfsense_port;
+	$ssh = new Net_SSH2($local_pfsense_ip,$pfsense_port);
 	if (!$ssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
 		exit('Login Failed');
 	}
