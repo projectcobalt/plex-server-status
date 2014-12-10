@@ -21,7 +21,7 @@ class serviceSAB
 	function check_port()
 	{
 		//$conn = @fsockopen($this->url, $this->port, $errno, $errstr, 10);
-		$conn = @fsockopen($this->url, 80, $errno, $errstr, 10);
+		$conn = @fsockopen("sab.mike-d82.com", $this->port, $errno, $errstr, 10);
 		if ($conn) 
 		{
 			fclose($conn);
