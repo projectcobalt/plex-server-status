@@ -20,7 +20,7 @@ class serviceSAB
 	
 	function check_port()
 	{
-		$conn = @fsockopen($this->host, $this->port, $errno, $errstr, 0.5);
+		$conn = @fsockopen($this->host, $this->port, $errno, $errstr, 10);
 		if ($conn) 
 		{
 			fclose($conn);
