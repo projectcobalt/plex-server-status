@@ -29,7 +29,7 @@
 	$weather_lat = $config['misc']['weather_lat'];
 	$weather_long = $config['misc']['weather_long'];
 	$plex_port = $config['network']['plex_port'];
-	$zpools = $config['zpools'];
+	$zpools = $config['zpools']['zpool1'];
 	$filesystems = $config['filesystems'];
 
 	// Set the path for the Plex Token
