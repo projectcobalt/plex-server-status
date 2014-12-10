@@ -16,7 +16,7 @@
 	$cp_server_ip = $config['network']['cp_server_ip'];
 	$hp_server_ip = $config['network']['hp_server_ip'];
 	$mad_server_ip = $config['network']['mad_server_ip'];
-	//$nas_server_ip = $config['network']['plex_server_ip'];
+	$pf_server_ip = $config['network']['pf_server_ip'];
 	$ssh_username = $config['credentials']['ssh_username'];
 	$ssh_password = $config['credentials']['ssh_password'];
 	$plex_username = $config['credentials']['plex_username'];
