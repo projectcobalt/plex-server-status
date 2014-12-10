@@ -26,7 +26,7 @@ class service
 			return true;
 		}
 		else
-			return false;
+			return true;
 	}
 	
 	function makeButton()
