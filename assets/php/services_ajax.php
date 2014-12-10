@@ -24,6 +24,7 @@ endif;
 
 $services = array(
 	new service("Plex", 32400, "http://"'.plex_server_ip.'"/web/index.html#!/dashboard"),
+	echo "http://"'.plex_server_ip.'"/web/index.html#!/dashboard"
 	new service("pfSense", 80, "https://'.$pf_server_ip.'", $pf_server_ip),
 	new serviceSAB($sabTitle, 80, "http://'.$sab_server_ip.'"),
 	new service("NZBDrone", 80, "http://'.$nzb_server_ip.'"),
