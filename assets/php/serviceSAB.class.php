@@ -22,8 +22,6 @@ class serviceSAB
 	{
 		$conn = @fsockopen($this->host, $this->port, $errno, $errstr, 0.5);
 		if ($conn) 
-		echo $errno >/tmp/test.txt;
-		echo $errstr >/tmp/test.txt;
 		{
 			fclose($conn);
 			return true;
