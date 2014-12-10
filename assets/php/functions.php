@@ -10,6 +10,7 @@
 	$local_server_ip = $config['network']['local_server_ip'];
 	$pfsense_if_name = $config['network']['pfsense_if_name'];
 	$pfsense_port = $config['network']['pfsense_port'];
+	$nas_port = $config['network']['nas_port']
 	$wan_domain = $config['network']['wan_domain'];
 	$plex_server_ip = $config['network']['plex_server_ip'];
 	$sab_server_ip = $config['network']['sab_server_ip'];
@@ -17,6 +18,7 @@
 	$cp_server_ip = $config['network']['cp_server_ip'];
 	$hp_server_ip = $config['network']['hp_server_ip'];
 	$mad_server_ip = $config['network']['mad_server_ip'];
+	$nas_server_ip = $config['network']['nas_server_ip'];
 	$pf_server_ip = $config['network']['pf_server_ip'];
 	$ssh_username = $config['credentials']['ssh_username'];
 	$ssh_password = $config['credentials']['ssh_password'];
@@ -153,7 +155,11 @@ function zpoolHealth($name) //returns status of provided zpool
 
 function zfsFilesystems($zpool) //returns 2 dimensional array of all filesystems in provided zpool, with name, used space and available space
 {
-		$output = shell_exec('/sbin/zfs get -r -o name,value -Hp used,avail '.$zpool);
+	$ssh = new Net_SSH2($nas_server_ip,$nas_port);
+	if (!$ssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
+		exit('Login Failed');
+	}
+	$output = ssh_exec('/sbin/zfs get -r -o name,value -Hp used,avail '.$zpool);
         $zfs_fs_stats = preg_split('/[\n|\t]/',$output);
         $zfs_fs_stats_p = array_pop($zfs_fs_stats);
 		$zfs_fs_array = array_chunk($zfs_fs_stats,4);
