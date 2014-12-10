@@ -10,6 +10,7 @@
 	$local_server_ip = $config['network']['local_server_ip'];
 	$pfsense_if_name = $config['network']['pfsense_if_name'];
 	$wan_domain = $config['network']['wan_domain'];
+	$plex_server_ip = $config['network']['plex_server_ip'];
 	$sab_server_ip = $config['network']['sab_server_ip'];
 	$nzb_server_ip = $config['network']['nzb_server_ip'];
 	$cp_server_ip = $config['network']['cp_server_ip'];
