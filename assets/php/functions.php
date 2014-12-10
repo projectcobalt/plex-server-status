@@ -148,7 +148,7 @@ function zpoolHealth($name) //returns status of provided zpool
 {
 	$ssh = new Net_SSH2($nas_server_ip,$nas_port);
 	if (!$ssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
-		exit('Login Failed');
+		exit('Login Failed zpoolHealth');
 	}
 	$zpool = ssh_exec('/sbin/zpool status '.$name);
         $findme = 'state:';
@@ -161,7 +161,7 @@ function zfsFilesystems($zpool) //returns 2 dimensional array of all filesystems
 {
 	$ssh = new Net_SSH2($nas_server_ip,$nas_port);
 	if (!$ssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
-		exit('Login Failed');
+		exit('Login Failed zfs Filesystems');
 	}
 	$output = ssh_exec('/sbin/zfs get -r -o name,value -Hp used,avail '.$zpool);
         $zfs_fs_stats = preg_split('/[\n|\t]/',$output);
