@@ -11,7 +11,7 @@
 	global $plexToken;
 
 	$detect = new Mobile_Detect;
-	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
+	$plexSessionXML = simplexml_load_file('http://mike-d82.com:32400/status/sessions/all?X-Plex-Token='.$plexToken);
 	
 ?>
 <html lang="en">
