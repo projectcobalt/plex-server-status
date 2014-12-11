@@ -397,7 +397,7 @@ function makeRecenlyReleased()
 	$mediaXML = simplexml_load_file($plex_server_ip.$mediaKey);
 	$movieTitle = $mediaXML->Video['title'];
 	$movieArt = $mediaXML->Video['thumb'];
-	echo '<img src="plex.php?img=' . urlencode($network.':'.$plex_port . $movieArt) . '" alt="...">';
+	echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt) . '" alt="...">';
 	echo '</div>'; // Close item div
 	$i=1;
 	for ( ; ; ) {
@@ -408,7 +408,7 @@ function makeRecenlyReleased()
 		$movieArt = $mediaXML->Video['thumb'];
 		$movieYear = $mediaXML->Video['year'];
 		echo '<div class="item">';
-		echo '<img src="plex.php?img=' . urlencode($network.':'.$plex_port . $movieArt) . '" alt="...">';
+		echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt) . '" alt="...">';
 		//echo '<img src="'.$network.':'.$plex_port.$movieArt.'?X-Plex-Token='.$plexToken.'" alt="...">';
 		//echo '<div class="carousel-caption">';
 		//echo '<h3>'.$movieTitle.$movieYear.'</h3>';
@@ -465,7 +465,7 @@ function makeNowPlaying()
 			if ($type == "movie"):
 				// Build information for a movie
 				$movieArt = $mediaXML->Video['thumb'];
-				echo '<img src="plex.php?img=' . urlencode($network.':'.$plex_port . $movieArt) . '" alt="...">';
+				echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt) . '" alt="...">';
 				echo '<div class="caption">';
 				$movieTitle = $mediaXML->Video['title'];
 				//echo '<h2 class="exoextralight">'.$movieTitle.'</h2>';
@@ -479,7 +479,7 @@ function makeNowPlaying()
 			else:
 				// Build information for a tv show
 				$tvArt = $mediaXML->Video['grandparentThumb'];
-				echo '<img src="plex.php?img=' . urlencode($network.':'.$plex_port . $tvArt) . '" alt="...">';
+				echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $tvArt) . '" alt="...">';
 				echo '<div class="caption">';
 				$showTitle = $mediaXML->Video['grandparentTitle'];
 				$episodeTitle = $mediaXML->Video['title'];
