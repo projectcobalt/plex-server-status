@@ -470,7 +470,7 @@ function makeNowPlaying()
 			file_put_contents('/tmp/sessionInfo.txt', $sessionInfo);
 			$mediaKey=$sessionInfo['key'];
 			//-----------------------------------------
-			file_put_contents('/tmp/mediakey.txt', $mediakey);
+			file_put_contents('/tmp/mediakey.txt', $mediaKey);
 			$playerTitle=$sessionInfo->Video['title'];
 			//-----------------------------------------
 			file_put_contents('/tmp/title.txt', $playerTitle);
