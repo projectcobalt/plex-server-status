@@ -476,12 +476,13 @@ function makeNowPlaying()
 			file_put_contents('/tmp/title.txt', $playerTitle);
 			$mediaXML = simplexml_load_file($plex_server_ip.':'.$plex_port.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 			$type=$mediaXML->Video['type'];
+			//-----------------------------------------
+			file_put_contents('/tmp/media.txt', $mediaXML);
 			echo '<div class="thumbnail">';
 			$i++; // Increment i every pass through the array
 			if ($type == "movie"):
 				// Build information for a movie
-				//-----------------------------------------
-				file_put_contents('/tmp/movie.txt', 'movie');
+
 				$movieArt = $mediaXML->Video['thumb'];
 				echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
 				echo '<div class="caption">';
