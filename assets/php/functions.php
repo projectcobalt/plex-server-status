@@ -3,9 +3,12 @@
 	$config_path = "/var/www-credentials/config.ini"; //path to config file, recommend you place it outside of web root
 	
 	Ini_Set( 'display_errors', false);
+	include '../../init.php';
 	include("lib/phpseclib0.3.5/Net/SSH2.php");
 	$config = parse_ini_file($config_path, true);
 	
+	// Import variables from config file
+    // Network Details
 	$local_pfsense_ip = $config['network']['local_pfsense_ip'];
 	$local_server_ip = $config['network']['local_server_ip'];
 	$pfsense_if_name = $config['network']['pfsense_if_name'];
@@ -20,10 +23,13 @@
 	$mad_server_ip = $config['network']['mad_server_ip'];
 	$nas_server_ip = $config['network']['nas_server_ip'];
 	$pf_server_ip = $config['network']['pf_server_ip'];
+	$plex_port = $config['network']['plex_port'];
+	// Credentials
 	$ssh_username = $config['credentials']['ssh_username'];
 	$ssh_password = $config['credentials']['ssh_password'];
 	$plex_username = $config['credentials']['plex_username'];
 	$plex_password = $config['credentials']['plex_password'];
+	// API Keys
 	$forecast_api = $config['api_keys']['forecast_api'];
 	$sabnzbd_api = $config['api_keys']['sabnzbd_api'];
 	$weather_lat = $config['misc']['weather_lat'];
@@ -33,15 +39,16 @@
 	$filesystems = $config['filesystems'];
 
 	// Set the path for the Plex Token
-//$plexTokenCache = '../misc/plex_token.txt';
-// Check to see if the plex token exists and is younger than one week
-// if not grab it and write it to our caches folder
-//if (file_exists($plexTokenCache) && (filemtime($plexTokenCache) > (time() - 60 * 60 * 24 * 7))) {
-//	$plexToken = file_get_contents("../misc/plex_token.txt");
-//} else {
-//	file_put_contents($plexTokenCache, getPlexToken());
-//	$plexToken = file_get_contents("../misc/plex_token.txt");
-//}
+	$plexTokenCache = '../misc/plex_token.txt';
+	//Check to see if the plex token exists and is younger than one week
+	//if not grab it and write it to our caches folder
+	if (file_exists($plexTokenCache) && (filemtime($plexTokenCache) > (time() - 60 * 60 * 24 * 7))) {
+		$plexToken = file_get_contents("../misc/plex_token.txt");
+	} 
+	else {
+		file_put_contents($plexTokenCache, getPlexToken());
+		$plexToken = file_get_contents("../misc/plex_token.txt");
+	}
 	
 
 if (strpos(strtolower(PHP_OS), "Darwin") === false)
