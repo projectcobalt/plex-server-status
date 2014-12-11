@@ -350,7 +350,8 @@ function makeRecenlyPlayed()
 	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
 	$traktThumb = '/Users/zeus/Sites/d4rk.co/assets/caches/thumbnails/all-tvthumb.jpg';
 	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
-
+	//-----------------------------------------
+	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
 	echo '<div class="col-md-12">';
 	if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
 		// Trakt image is less than 15 minutes old.
@@ -453,8 +454,6 @@ function makeNowPlaying()
 	global $plexToken;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
 	$network = getNetwork();
 	$plexSessionXML = simplexml_load_file('mike-d82.com:32400/status/sessions/all?X-Plex-Token=yp5yvybQGpPuxLVepdBa');
-	//-----------------------------------------
-	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
 	if (count($plexSessionXML->Video) == 0):
 		makeRecenlyReleased();
 	else:
