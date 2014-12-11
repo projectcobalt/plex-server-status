@@ -15,6 +15,7 @@
 
 	if (count($plexSessionXML->Video) == 0):
 		$title = 'Recently Added';
+		makeRecenlyReleased()
 	else:
 		$title = 'Now Playing';
 	endif;
