@@ -377,7 +377,7 @@ function makeRecenlyReleased()
 	global $plex_port;
 	global $plex_server_ip;
 	global $plexToken ;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
-	$plexNewestXML = simplexml_load_file($plex_server_ip.'/library/sections/1/recentlyAdded/all?X-Plex-Token='.$plexToken);
+	$plexNewestXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/library/sections/1/recentlyAdded/all?X-Plex-Token='.$plexToken);
 	$clientIP = get_client_ip();
 	$network = getNetwork();
 	
@@ -444,7 +444,7 @@ function makeNowPlaying()
 	global $plex_port;
 	global $plexToken;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
 	$network = getNetwork();
-	$plexSessionXML = simplexml_load_file($plex_server_ip.'/status/sessions/all?X-Plex-Token='.$plexToken);
+	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
 
 	if (count($plexSessionXML->Video) == 0):
 		makeRecenlyReleased();
@@ -511,7 +511,7 @@ function plexMovieStats()
 	global $plex_port;
 	global $plex_server_ip;
 	global $plexToken;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
-	$plexNewestXML = simplexml_load_file($plex_server_ip.'/library/sections/4/all');
+	$plexNewestXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/library/sections/1/all?X-Plex-Token='.$plexToken);
 	$clientIP = get_client_ip();
 	$network = getNetwork();
 	$total_movies = count($plexNewestXML -> Video);
