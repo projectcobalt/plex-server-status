@@ -480,6 +480,8 @@ function makeNowPlaying()
 			$i++; // Increment i every pass through the array
 			if ($type == "movie"):
 				// Build information for a movie
+				//-----------------------------------------
+				file_put_contents('/tmp/movie.txt', 'movie');
 				$movieArt = $mediaXML->Video['thumb'];
 				echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
 				echo '<div class="caption">';
@@ -494,6 +496,8 @@ function makeNowPlaying()
 				echo '<p class="exolight" style="margin-top:5px;">'.$movieSummary.'</p>';
 			else:
 				// Build information for a tv show
+				//-----------------------------------------
+				file_put_contents('/tmp/tv.txt', 'tv');
 				$tvArt = $mediaXML->Video['grandparentThumb'];
 				echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $tvArt) . '" alt="...">';
 				echo '<div class="caption">';
