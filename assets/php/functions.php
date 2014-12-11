@@ -467,6 +467,8 @@ function makeNowPlaying()
 		endforeach;
 		foreach ($plexSessionXML->Video as $sessionInfo):
 			//-----------------------------------------
+			file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
+			//-----------------------------------------
 			file_put_contents('/tmp/sessionInfo.txt', $sessionInfo);
 			$mediaKey=$sessionInfo['key'];
 			//-----------------------------------------
