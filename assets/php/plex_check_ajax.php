@@ -1,6 +1,6 @@
 <?php
 	Ini_Set( 'display_errors', true );
-	include '../../init.php';
+	//include '../../init.php';
 	include 'functions.php';
 	
 	global $plex_server_ip;
