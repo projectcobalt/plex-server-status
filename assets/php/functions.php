@@ -356,7 +356,7 @@ function makeRecenlyPlayed()
 	$network = getNetwork();
 	$clientIP = get_client_ip();
 	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
-	$traktThumb = '/Users/zeus/Sites/d4rk.co/assets/caches/thumbnails/all-tvthumb.jpg';
+	$traktThumb = './assets/misc/all-tvthumb.jpg';
 	$plexSessionXML = simplexml_load_file($plexSession);
 
 	echo '<div class="col-md-12">';
