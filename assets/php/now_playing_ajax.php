@@ -14,6 +14,8 @@
 	$plexcheckfile2_md5 = md5_file($plexcheckfile2);
 	$viewers = 0;
 
+	makeNowPlaying();
+
 	// See if Plex Media Server is online and how many people are watching.
 	if (!$plexSessionXML):
 		// If Plex Media Server is offline.
