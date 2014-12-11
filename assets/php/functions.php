@@ -471,7 +471,7 @@ function makeNowPlaying()
 			$mediaKey=$sessionInfo['key'];
 			//-----------------------------------------
 			file_put_contents('/tmp/mediakey.txt', $mediakey);
-			$playerTitle=$sessionInfo->Player['title'];
+			$playerTitle=$sessionInfo->Video['title'];
 			//-----------------------------------------
 			file_put_contents('/tmp/title.txt', $playerTitle);
 			$mediaXML = simplexml_load_file($plex_server_ip.':'.$plex_port.$mediaKey.'/all?X-Plex-Token='.$plexToken);
