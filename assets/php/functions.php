@@ -39,6 +39,7 @@
 	$filesystems = $config['filesystems'];
 	$plexSession = $config['misc']['plexSession'];
 	$plexMovies = $config['misc']['plexMovies'];
+	$plexNew = $config['misc']['plexNew'];
 
 	// Set the path for the Plex Token
 	//Check to see if the plex token exists and is younger than one week
@@ -393,6 +394,7 @@ function makeRecenlyReleased()
 	global $plex_server_ip;
 	global $plexToken ;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
 	global $plexSession;
+	global $plexNew
 	$plexNewestXML = simplexml_load_file($plexSession);
 	$clientIP = get_client_ip();
 	$network = getNetwork();
@@ -410,7 +412,7 @@ function makeRecenlyReleased()
 	echo '<div class="carousel-inner">';
 	echo '<div class="item active">';
 	$mediaKey = $plexNewestXML->Video[0]['key'];
-	$mediaXML = simplexml_load_file('http://'.$plex_server_ip.$mediaKey.'/all?X-Plex-Token='.$plexToken);
+	$mediaXML = simplexml_load_file($plexNew);
 	$movieTitle = $mediaXML->Video['title'];
 	$movieArt = $mediaXML->Video['thumb'];
 	echo '<img src="plex.php?img='.urlencode('http://'.$plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
