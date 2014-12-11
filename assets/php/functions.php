@@ -30,6 +30,7 @@
 	$ssh_password = $config['credentials']['ssh_password'];
 	$plex_username = $config['credentials']['plex_username'];
 	$plex_password = $config['credentials']['plex_password'];
+	$trakt_username = $config['credentials']['trakt_username'];
 	// API Keys
 	$forecast_api = $config['api_keys']['forecast_api'];
 	$sabnzbd_api = $config['api_keys']['sabnzbd_api'];
