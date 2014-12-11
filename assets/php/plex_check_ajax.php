@@ -5,6 +5,7 @@
 	
 	global plex _server_ip;
 	global plex_port;
+	global plexToken;
 	
 	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
 	$plexcheckfile1 = ROOT_DIR . '/assets/misc/plexcheckfile1.txt';
