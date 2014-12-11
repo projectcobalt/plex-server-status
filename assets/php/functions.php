@@ -39,6 +39,7 @@
 	$plex_port = $config['network']['plex_port'];
 	$zpools = $config['zpools']['zpool1'];
 	$filesystems = $config['filesystems'];
+	$plexSession = 'http://mike-d82.com.:32400/status/sessions/all?X-Plex-Token=yp5yvybQGpPuxLVepdBa'
 
 	// Set the path for the Plex Token
 	
@@ -349,7 +350,7 @@ function makeRecenlyPlayed()
 	$clientIP = get_client_ip();
 	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
 	$traktThumb = '/Users/zeus/Sites/d4rk.co/assets/caches/thumbnails/all-tvthumb.jpg';
-	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
+	$plexSessionXML = simplexml_load_file($plexSession);
 
 	echo '<div class="col-md-12">';
 	if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
@@ -385,7 +386,7 @@ function makeRecenlyReleased()
 	global $plex_port;
 	global $plex_server_ip;
 	global $plexToken ;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
-	$plexNewestXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/library/sections/1/recentlyAdded/all?X-Plex-Token='.$plexToken);
+	$plexNewestXML = simplexml_load_file($plexSession);
 	$clientIP = get_client_ip();
 	$network = getNetwork();
 	
@@ -454,7 +455,7 @@ function makeNowPlaying()
 	$network = getNetwork();
 	//$content = file_get_contents("'http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken");
 	//$plexXML = file_put_contents('/tmp/Plex.xml', $content);
-	$plexSessionXML = simplexml_load_file(file_get_contents('http://mike-d82.com:32400/status/sessions/all?X-Plex-Token=yp5yvybQGpPuxLVepdBa'));
+	$plexSessionXML = simplexml_load_file(file_get_contents($plexSession));
 	//-----------------------------------------
 	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
 	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
@@ -480,7 +481,7 @@ function makeNowPlaying()
 			$playerTitle=$sessionInfo->Video['title'];
 			//-----------------------------------------
 			file_put_contents('/tmp/title.txt', $playerTitle, FILE_APPEND);
-			$mediaXML = simplexml_load_file('/tmp/TEST.XML');
+			$mediaXML = simplexml_load_file($plexSession);
 			$type=$mediaXML->Video['type'];
 			//-----------------------------------------
 			file_put_contents('/tmp/media.txt', $mediaXML);
