@@ -338,7 +338,7 @@ function makeRecenlyPlayed()
 {
 	
 	global $local_pfsense_ip;
-	global $plex_server_ip
+	global $plex_server_ip;
 	global $plex_port;
 	global $plexToken;
 	global $trakt_username;
