@@ -152,7 +152,12 @@ function getDiskspaceUsed($dir)
 
 function zpoolHealth($name) //returns status of provided zpool
 {
-	$NASssh = new Net_SSH2($local_server_ip,$nas_port);
+	global nas_server_ip;
+	global nas_port;
+	global ssh_username;
+	global ssh_password;
+	
+	$NASssh = new Net_SSH2($nas_server_ip,$nas_port);
 	if (!$NASssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
 		exit('Login Failed zpoolHealth');
 	}
@@ -165,7 +170,12 @@ function zpoolHealth($name) //returns status of provided zpool
 
 function zfsFilesystems($zpool) //returns 2 dimensional array of all filesystems in provided zpool, with name, used space and available space
 {
-	$NAS1ssh = new Net_SSH2($local_server_ip,$nas_port);
+	global nas_server_ip;
+	global nas_port;
+	global ssh_username;
+	global ssh_password;
+	
+	$NAS1ssh = new Net_SSH2($nas_server_ip,$nas_port);
 	if (!$NAS1ssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
 		exit('Login Failed zfs Filesystems');
 	}
