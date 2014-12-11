@@ -1,5 +1,5 @@
 <?php
-//include 'init.php';
+include 'init.php';
 include ROOT_DIR . '/assets/php/functions.php';
 global $plexToken;
 
