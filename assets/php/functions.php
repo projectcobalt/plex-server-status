@@ -466,7 +466,9 @@ function makeNowPlaying()
 		endforeach;
 		foreach ($plexSessionXML->Video as $sessionInfo):
 			$mediaKey=$sessionInfo['key'];
+			file_put_contents('tmp/mediakey.txt', $mediakey);
 			$playerTitle=$sessionInfo->Player['title'];
+			file_put_contents('tmp/title.txt', $playerTitle);
 			$mediaXML = simplexml_load_file($plex_server_ip.':'.$plex_port.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 			$type=$mediaXML->Video['type'];
 			echo '<div class="thumbnail">';
