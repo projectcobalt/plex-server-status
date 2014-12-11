@@ -455,7 +455,7 @@ function makeNowPlaying()
 	$network = getNetwork();
 	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
 	//-----------------------------------------
-	file_put_contents('tmp/plexSessionXML.txt', $plexSessionXML);
+	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
 	if (count($plexSessionXML->Video) == 0):
 		makeRecenlyReleased();
 	else:
@@ -467,13 +467,13 @@ function makeNowPlaying()
 		endforeach;
 		foreach ($plexSessionXML->Video as $sessionInfo):
 			//-----------------------------------------
-			file_put_contents('tmp/sessionInfo.txt', $sessionInfo);
+			file_put_contents('/tmp/sessionInfo.txt', $sessionInfo);
 			$mediaKey=$sessionInfo['key'];
 			//-----------------------------------------
-			file_put_contents('tmp/mediakey.txt', $mediakey);
+			file_put_contents('/tmp/mediakey.txt', $mediakey);
 			$playerTitle=$sessionInfo->Player['title'];
 			//-----------------------------------------
-			file_put_contents('tmp/title.txt', $playerTitle);
+			file_put_contents('/tmp/title.txt', $playerTitle);
 			$mediaXML = simplexml_load_file($plex_server_ip.':'.$plex_port.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 			$type=$mediaXML->Video['type'];
 			echo '<div class="thumbnail">';
