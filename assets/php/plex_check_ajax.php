@@ -2,7 +2,8 @@
 	Ini_Set( 'display_errors', true );
 	include '../../init.php';
 	include 'functions.php';
-
+	global plex _server_ip;
+	global plex_port;
 	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
 	$plexcheckfile1 = ROOT_DIR . '/assets/misc/plexcheckfile1.txt';
 	$plexcheckfile2 = ROOT_DIR . '/assets/misc/plexcheckfile2.txt';
