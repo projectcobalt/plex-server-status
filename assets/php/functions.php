@@ -35,7 +35,7 @@
 	$sabnzbd_api = $config['api_keys']['sabnzbd_api'];
 	$weather_lat = $config['misc']['weather_lat'];
 	$weather_long = $config['misc']['weather_long'];
-	$zpools = array($config['zpools']['zpool1'],$config['zpools']['zpool2'],$config['zpools']['zpool3'],$config['zpools']['zpool4']);
+	$zpools = array($config['zpools']['zpool1'],$config['zpools']['zpool2']);
 	$filesystems = $config['filesystems'];
 	$plexSession = $config['misc']['plexSession'];
 
