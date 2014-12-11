@@ -40,7 +40,6 @@
 	$plexSession = $config['misc']['plexSession'];
 
 	// Set the path for the Plex Token
-	
 	//Check to see if the plex token exists and is younger than one week
 	//if not grab it and write it to our caches folder
 	if (file_exists($plexTokenCache) && (filemtime($plexTokenCache) > (time() - 60 * 60 * 24 * 7))) {
