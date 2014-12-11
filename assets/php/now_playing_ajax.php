@@ -4,10 +4,10 @@
 	include 'functions.php';
 
 	global $plex_server_ip;
-	global $plex_port;
 	global $plexToken;	
+	global $plexSession;
 	
-	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
+	$plexSessionXML = simplexml_load_file($plexSession);
 	$plexcheckfile1 = ROOT_DIR . '/assets/misc/plexcheckfile1.txt';
 	$plexcheckfile2 = ROOT_DIR . '/assets/misc/plexcheckfile2.txt';
 	$plexcheckfile1_md5 = md5_file($plexcheckfile1);

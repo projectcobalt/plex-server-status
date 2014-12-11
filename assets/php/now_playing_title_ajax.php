@@ -8,10 +8,10 @@
 	// shows being watched at the same time.
 	
 	global $plex_server_ip;
-	global $plex_port;
 	global $plexToken;
+	global $plexSession;
 	
-	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
+	$plexSessionXML = simplexml_load_file($plexSession);
 
 	if (count($plexSessionXML->Video) == 0):
 		$title = 'Recently Added';
