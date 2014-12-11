@@ -662,8 +662,11 @@ function getPlexToken()
     global $plex_username;
 	global $plex_password;
 	$myPlex = shell_exec('curl -H "Content-Length: 0" -H "X-Plex-Client-Identifier: my-app" -u "'.$plex_username.'"":""'.$plex_password.'" -X POST https://my.plexapp.com/users/sign_in.xml 2> /dev/null');
+        file_put_contents(/tmp/tokenXML.txt, $myPlex);
         $myPlex_xml = simplexml_load_string($myPlex);
+        file_put_contents(/tmp/mytokenXML.txt, $myPlex_xml);
         $token = $myPlex_xml['authenticationToken'];
+	file_put_contents(/tmp/token.txt, $token);
 	return $token;
 }
 
