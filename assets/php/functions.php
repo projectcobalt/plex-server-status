@@ -473,6 +473,7 @@ function makeNowPlaying()
 				// Build information for a movie
 
 				$movieArt = $mediaXML->Video['thumb'];
+				$movieTitle = $mediaXML->Video['title'];
 				echo '<img src="plex.php?img='.urlencode($plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
 				echo '<div class="caption">';
 				$movieTitle = $mediaXML->Video['title'];
