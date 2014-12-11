@@ -403,7 +403,7 @@ function makeRecenlyReleased()
 	$mediaXML = simplexml_load_file('http://'.$plex_server_ip.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 	$movieTitle = $mediaXML->Video['title'];
 	$movieArt = $mediaXML->Video['thumb'];
-	echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.$movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
+	echo '<img src="plex.php?img='.urlencode($plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
 	echo '</div>'; // Close item div
 	$i=1;
 	for ( ; ; ) {
