@@ -414,7 +414,7 @@ function makeRecenlyReleased()
 		$movieArt = $mediaXML->Video['thumb'];
 		$movieYear = $mediaXML->Video['year'];
 		echo '<div class="item">';
-		echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.$movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
+		echo '<img src="plex.php?img='.urlencode($plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
 		//echo '<img src="'.$network.$movieArt.'?X-Plex-Token='.$plexToken.'" alt="...">';
 		//echo '<div class="carousel-caption">';
 		//echo '<h3>'.$movieTitle.$movieYear.'</h3>';
@@ -473,7 +473,7 @@ function makeNowPlaying()
 				// Build information for a movie
 
 				$movieArt = $mediaXML->Video['thumb'];
-				echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.$movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
+				echo '<img src="plex.php?img='.urlencode($plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
 				echo '<div class="caption">';
 				$movieTitle = $mediaXML->Video['title'];
 				//echo '<h2 class="exoextralight">'.$movieTitle.'</h2>';
@@ -489,7 +489,7 @@ function makeNowPlaying()
 				//-----------------------------------------
 				file_put_contents('/tmp/tv.txt', 'tv');
 				$tvArt = $mediaXML->Video['grandparentThumb'];
-				echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.$tvArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
+				echo '<img src="plex.php?img='.urlencode($plex_server_ip.$tvArt).'" alt="'.$showTitle.'">';
 				echo '<div class="caption">';
 				$showTitle = $mediaXML->Video['grandparentTitle'];
 				$episodeTitle = $mediaXML->Video['title'];
