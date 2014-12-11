@@ -38,6 +38,7 @@
 	$zpools = array($config['zpools']['zpool1'],$config['zpools']['zpool2']);
 	$filesystems = $config['filesystems'];
 	$plexSession = $config['misc']['plexSession'];
+	$plexMovies = $config['misc']['plexMovies'];
 
 	// Set the path for the Plex Token
 	//Check to see if the plex token exists and is younger than one week
@@ -530,8 +531,10 @@ function plexMovieStats()
 {
 
 	global $plex_server_ip;
+	global $plexMovies;
 	global $plexToken;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
-	$plexNewestXML = simplexml_load_file('http://mike-d82.com:32400/library/sections/1/all?X-Plex-Token=yp5yvybQGpPuxLVepdBa');
+	
+	$plexNewestXML = simplexml_load_file($PlexMovies);
 	
 	$clientIP = get_client_ip();
 	$network = getNetwork();
