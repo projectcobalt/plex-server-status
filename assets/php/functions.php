@@ -39,7 +39,7 @@
 	$plex_port = $config['network']['plex_port'];
 	$zpools = $config['zpools']['zpool1'];
 	$filesystems = $config['filesystems'];
-	$plexSession = 'http://mike-d82.com.:32400/status/sessions/all?X-Plex-Token=yp5yvybQGpPuxLVepdBa'
+	$plexSession = 'http://mike-d82.com.:32400/status/sessions/all?X-Plex-Token=yp5yvybQGpPuxLVepdBa';
 
 	// Set the path for the Plex Token
 	
