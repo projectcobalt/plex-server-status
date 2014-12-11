@@ -5,9 +5,13 @@
 
 	include("assets/php/functions.php");
 	include('assets/php/Mobile_Detect.php');
+	
+	global $plex_server_ip;
+	global $plex_port;
+	global $plexToken;
 
 	$detect = new Mobile_Detect;
-	$plexSessionXML = simplexml_load_file($config['network']['plex_server_ip'].'/status/sessions');
+	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
 ?>
 <html lang="en">
 	<head>
