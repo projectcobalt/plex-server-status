@@ -394,7 +394,7 @@ function makeRecenlyReleased()
 	global $plex_server_ip;
 	global $plexToken ;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
 	global $plexSession;
-	global $plexNew
+	global $plexNew;
 	$plexNewestXML = simplexml_load_file($plexSession);
 	$clientIP = get_client_ip();
 	$network = getNetwork();
