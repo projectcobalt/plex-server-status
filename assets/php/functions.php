@@ -403,21 +403,21 @@ function makeRecenlyReleased()
 	echo '<div class="carousel-inner">';
 	echo '<div class="item active">';
 	$mediaKey = $plexNewestXML->Video[0]['key'];
-	$mediaXML = simplexml_load_file($plex_server_ip.$mediaKey);
+	$mediaXML = simplexml_load_file($plex_server_ip.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 	$movieTitle = $mediaXML->Video['title'];
 	$movieArt = $mediaXML->Video['thumb'];
-	echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt) . '" alt="...">';
+	echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port.$movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
 	echo '</div>'; // Close item div
 	$i=1;
 	for ( ; ; ) {
 		if($i==15) break;
 		$mediaKey = $plexNewestXML->Video[$i]['key'];
-		$mediaXML = simplexml_load_file($plex_server_ip.$mediaKey);
+		$mediaXML = simplexml_load_file($plex_server_ip.':'.$plex_port.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 		$movieTitle = $mediaXML->Video['title'];
 		$movieArt = $mediaXML->Video['thumb'];
 		$movieYear = $mediaXML->Video['year'];
 		echo '<div class="item">';
-		echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt) . '" alt="...">';
+		echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
 		//echo '<img src="'.$network.':'.$plex_port.$movieArt.'?X-Plex-Token='.$plexToken.'" alt="...">';
 		//echo '<div class="carousel-caption">';
 		//echo '<h3>'.$movieTitle.$movieYear.'</h3>';
@@ -467,14 +467,14 @@ function makeNowPlaying()
 		foreach ($plexSessionXML->Video as $sessionInfo):
 			$mediaKey=$sessionInfo['key'];
 			$playerTitle=$sessionInfo->Player['title'];
-			$mediaXML = simplexml_load_file($plex_server_ip.$mediaKey);
+			$mediaXML = simplexml_load_file($plex_server_ip.':'.$plex_port.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 			$type=$mediaXML->Video['type'];
 			echo '<div class="thumbnail">';
 			$i++; // Increment i every pass through the array
 			if ($type == "movie"):
 				// Build information for a movie
 				$movieArt = $mediaXML->Video['thumb'];
-				echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt) . '" alt="...">';
+				echo '<img src="plex.php?img=' . urlencode($plex_server_ip.':'.$plex_port . $movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
 				echo '<div class="caption">';
 				$movieTitle = $mediaXML->Video['title'];
 				//echo '<h2 class="exoextralight">'.$movieTitle.'</h2>';
