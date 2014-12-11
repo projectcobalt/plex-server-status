@@ -455,10 +455,7 @@ function makeNowPlaying()
 	$network = getNetwork();
 	//$content = file_get_contents("'http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken");
 	//$plexXML = file_put_contents('/tmp/Plex.xml', $content);
-	$plexSessionXML = simplexml_load_file(file_get_contents($plexSession));
-	//-----------------------------------------
-	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
-	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
+	$plexSessionXML = simplexml_load_file($plexSession);
 		if (!$plexSessionXML):
 		makeRecenlyViewed();
 	elseif (count($plexSessionXML->Video) == 0):
@@ -471,20 +468,10 @@ function makeNowPlaying()
 			$t++;
 		endforeach;
 		foreach ($plexSessionXML->Video as $sessionInfo):
-			//-----------------------------------------
-			file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML, FILE_APPEND);
-			//-----------------------------------------
-			file_put_contents('/tmp/sessionInfo.txt', $sessionInfo, FILE_APPEND);
 			$mediaKey=$sessionInfo['key'];
-			//-----------------------------------------
-			file_put_contents('/tmp/mediakey.txt', $mediaKey, FILE_APPEND);
 			$playerTitle=$sessionInfo->Video['title'];
-			//-----------------------------------------
-			file_put_contents('/tmp/title.txt', $playerTitle, FILE_APPEND);
 			$mediaXML = simplexml_load_file($plexSession);
 			$type=$mediaXML->Video['type'];
-			//-----------------------------------------
-			file_put_contents('/tmp/media.txt', $mediaXML);
 			echo '<div class="thumbnail">';
 			$i++; // Increment i every pass through the array
 			if ($type == "movie"):
