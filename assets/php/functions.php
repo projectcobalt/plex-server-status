@@ -403,7 +403,7 @@ function makeRecenlyReleased()
 	$mediaXML = simplexml_load_file('http://'.$plex_server_ip.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 	$movieTitle = $mediaXML->Video['title'];
 	$movieArt = $mediaXML->Video['thumb'];
-	echo '<img src="plex.php?img='.urlencode($plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
+	echo '<img src="plex.php?img='.urlencode('http://'.$plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
 	echo '</div>'; // Close item div
 	$i=1;
 	for ( ; ; ) {
@@ -414,7 +414,7 @@ function makeRecenlyReleased()
 		$movieArt = $mediaXML->Video['thumb'];
 		$movieYear = $mediaXML->Video['year'];
 		echo '<div class="item">';
-		echo '<img src="plex.php?img='.urlencode($plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
+		echo '<img src="plex.php?img='.urlencode('http://'.$plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
 		//echo '<img src="'.$network.$movieArt.'?X-Plex-Token='.$plexToken.'" alt="...">';
 		//echo '<div class="carousel-caption">';
 		//echo '<h3>'.$movieTitle.$movieYear.'</h3>';
@@ -474,7 +474,7 @@ function makeNowPlaying()
 
 				$movieArt = $mediaXML->Video['thumb'];
 				$movieTitle = $mediaXML->Video['title'];
-				echo '<img src="plex.php?img='.urlencode($plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
+				echo '<img src="plex.php?img='.urlencode('http://'.$plex_server_ip.$movieArt).'" alt="'.$movieTitle.'">';
 				echo '<div class="caption">';
 				$movieTitle = $mediaXML->Video['title'];
 				//echo '<h2 class="exoextralight">'.$movieTitle.'</h2>';
@@ -490,7 +490,7 @@ function makeNowPlaying()
 				//-----------------------------------------
 				file_put_contents('/tmp/tv.txt', 'tv');
 				$tvArt = $mediaXML->Video['grandparentThumb'];
-				echo '<img src="plex.php?img='.urlencode($plex_server_ip.$tvArt).'" alt="'.$showTitle.'">';
+				echo '<img src="plex.php?img='.urlencode('http://'.$plex_server_ip.$tvArt).'" alt="'.$showTitle.'">';
 				echo '<div class="caption">';
 				$showTitle = $mediaXML->Video['grandparentTitle'];
 				$episodeTitle = $mediaXML->Video['title'];
