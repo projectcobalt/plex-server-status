@@ -334,43 +334,52 @@ function get_client_ip()
 	return $ipaddress;
 }
 
-#function makeRecenlyPlayed()
-#{
-#	$plexSessionXML = simplexml_load_file('http://127.0.0.1:32400/status/sessions');
-#	$clientIP = get_client_ip();
-#
-#	$network = getNetwork();
-#	$trakt_url = 'http://trakt.tv/user/d4rk/widgets/watched/all-tvthumb.jpg';
-#	$traktThumb = '/Users/zeus/Sites/d4rk.co/assets/misc/all-tvthumb.jpg';
-#
-#	echo '<div class="col-md-12">';
-#	if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
-#		// Trakt image is less than 15 minutes old.
-#		// Don't refresh the image, just use the file as-is.
-#		echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
-#	} else {
-#		// Either file doesn't exist or our cache is out of date,
-#		// so check if the server has different data,
-#		// if it does, load the data from our remote server and also save it over our cache for next time.
-#		$thumbFromTrakt_md5 = md5_file($trakt_url);
-#		$traktThumb_md5 = md5_file($traktThumb);
-#		if ($thumbFromTrakt_md5 === $traktThumb_md5) {
-#			echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
-#		} else {
-#			$thumbFromTrakt = file_get_contents($trakt_url);
-#			file_put_contents($traktThumb, $thumbFromTrakt, LOCK_EX);
-#			echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
-#
-#		}
-#	}
-#	if($clientIP == '127.0.0.1' && count($plexSessionXML->Video) == 0) {
-#		echo '<hr>';
-#		echo '<h1 class="exoextralight" style="margin-top:5px;">';
-#		echo 'Forecast</h1>';
-#		echo '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=40.7838&lon=-96.622773&name=Lincoln, NE"> </iframe>';
-#	}
-#	echo '</div>';
-#}
+function makeRecenlyPlayed()
+{
+	
+	global $local_pfsense_ip;
+	global $plex_server_ip
+	global $plex_port;
+	global $plexToken;
+	global $trakt_username;
+	global $weather_lat;
+	global $weather_long;
+	global $weather_name;
+	$network = getNetwork();
+	$clientIP = get_client_ip();
+	$plexSessionXML = simplexml_load_file($network.':'.$plex_port.'/status/sessions');
+	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
+	$traktThumb = '/Users/zeus/Sites/d4rk.co/assets/caches/thumbnails/all-tvthumb.jpg';
+	$plexSessionXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken);
+
+	echo '<div class="col-md-12">';
+	if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
+		// Trakt image is less than 15 minutes old.
+		// Don't refresh the image, just use the file as-is.
+		echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+	} else {
+		// Either file doesn't exist or our cache is out of date,
+		// so check if the server has different data,
+		// if it does, load the data from our remote server and also save it over our cache for next time.
+		$thumbFromTrakt_md5 = md5_file($trakt_url);
+		$traktThumb_md5 = md5_file($traktThumb);
+		if ($thumbFromTrakt_md5 === $traktThumb_md5) {
+			echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+		} else {
+			$thumbFromTrakt = file_get_contents($trakt_url);
+			file_put_contents($traktThumb, $thumbFromTrakt, LOCK_EX);
+			echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+
+		}
+	}
+	if($clientIP == '127.0.0.1' && count($plexSessionXML->Video) == 0) {
+		echo '<hr>';
+		echo '<h1 class="exoextralight" style="margin-top:5px;">';
+		echo 'Forecast</h1>';
+		echo '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=40.7838&lon=-96.622773&name=Lincoln, NE"> </iframe>';
+	}
+	echo '</div>';
+}
 
 function makeRecenlyReleased()
 {
