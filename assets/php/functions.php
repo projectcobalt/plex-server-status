@@ -454,7 +454,7 @@ function makeNowPlaying()
 	$network = getNetwork();
 	//$content = file_get_contents("'http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken");
 	//$plexXML = file_put_contents('/tmp/Plex.xml', $content);
-	$plexSessionXML = simplexml_load_file(file_get_contents("'http://'.$plex_server_ip.':'.$plex_port.'/status/sessions/all?X-Plex-Token='.$plexToken"));
+	$plexSessionXML = simplexml_load_file(file_get_contents("'http://'$plex_server_ip':'$plex_port'/status/sessions/all?X-Plex-Token='$plexToken"));
 	//-----------------------------------------
 	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
 	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
