@@ -3,7 +3,7 @@
 	include '../../init.php';
 	include 'functions.php';
 	
-	global $plex _server_ip;
+	global $plex_server_ip;
 	global $plex_port;
 	global $plexToken;
 	
