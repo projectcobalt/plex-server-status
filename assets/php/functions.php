@@ -161,7 +161,7 @@ function zpoolHealth($name) //returns status of provided zpool
 	if (!$NASssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
 		exit('Login Failed zpoolHealth');
 	}
-	$zpool = ssh_exec('/sbin/zpool status '.$name);
+	$zpool = $NASssh->exec('/sbin/zpool status '.$name);
         $findme = 'state:';
         $stateStart = strpos($zpool, $findme);
         $health = (substr($zpool, $stateStart + 7, 8)); // GB
@@ -179,7 +179,7 @@ function zfsFilesystems($zpool) //returns 2 dimensional array of all filesystems
 	if (!$NAS1ssh->login($ssh_username,$ssh_password)) { // replace password and username with pfSense ssh username and password if you want to use this
 		exit('Login Failed zfs Filesystems');
 	}
-	$output = ssh_exec('/sbin/zfs get -r -o name,value -Hp used,avail '.$zpool);
+	$output = $NAS1ssh->exec('/sbin/zfs get -r -o name,value -Hp used,avail '.$zpool);
         $zfs_fs_stats = preg_split('/[\n|\t]/',$output);
         $zfs_fs_stats_p = array_pop($zfs_fs_stats);
 		$zfs_fs_array = array_chunk($zfs_fs_stats,4);
