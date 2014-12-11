@@ -24,7 +24,6 @@
 	$mad_server_ip = $config['network']['mad_server_ip'];
 	$nas_server_ip = $config['network']['nas_server_ip'];
 	$pf_server_ip = $config['network']['pf_server_ip'];
-	$plex_port = $config['network']['plex_port'];
 	// Credentials
 	$ssh_username = $config['credentials']['ssh_username'];
 	$ssh_password = $config['credentials']['ssh_password'];
@@ -36,7 +35,6 @@
 	$sabnzbd_api = $config['api_keys']['sabnzbd_api'];
 	$weather_lat = $config['misc']['weather_lat'];
 	$weather_long = $config['misc']['weather_long'];
-	$plex_port = $config['network']['plex_port'];
 	$zpools = $config['zpools']['zpool1'];
 	$filesystems = $config['filesystems'];
 	$plexSession = $config['misc']['plexSession'];
@@ -340,7 +338,6 @@ function makeRecenlyPlayed()
 	
 	global $local_pfsense_ip;
 	global $plex_server_ip;
-	global $plex_port;
 	global $plexToken;
 	global $trakt_username;
 	global $weather_lat;
@@ -383,7 +380,6 @@ function makeRecenlyPlayed()
 
 function makeRecenlyReleased()
 {
-	global $plex_port;
 	global $plex_server_ip;
 	global $plexToken ;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
 	$plexNewestXML = simplexml_load_file($plexSession);
@@ -403,22 +399,22 @@ function makeRecenlyReleased()
 	echo '<div class="carousel-inner">';
 	echo '<div class="item active">';
 	$mediaKey = $plexNewestXML->Video[0]['key'];
-	$mediaXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.$mediaKey.'/all?X-Plex-Token='.$plexToken);
+	$mediaXML = simplexml_load_file('http://'.$plex_server_ip.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 	$movieTitle = $mediaXML->Video['title'];
 	$movieArt = $mediaXML->Video['thumb'];
-	echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.':'.$plex_port.$movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
+	echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.$movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
 	echo '</div>'; // Close item div
 	$i=1;
 	for ( ; ; ) {
 		if($i==15) break;
 		$mediaKey = $plexNewestXML->Video[$i]['key'];
-		$mediaXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.$mediaKey.'/all?X-Plex-Token='.$plexToken);
+		$mediaXML = simplexml_load_file('http://'.$plex_server_ip.$mediaKey.'/all?X-Plex-Token='.$plexToken);
 		$movieTitle = $mediaXML->Video['title'];
 		$movieArt = $mediaXML->Video['thumb'];
 		$movieYear = $mediaXML->Video['year'];
 		echo '<div class="item">';
-		echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.':'.$plex_port . $movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
-		//echo '<img src="'.$network.':'.$plex_port.$movieArt.'?X-Plex-Token='.$plexToken.'" alt="...">';
+		echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.$movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
+		//echo '<img src="'.$network.$movieArt.'?X-Plex-Token='.$plexToken.'" alt="...">';
 		//echo '<div class="carousel-caption">';
 		//echo '<h3>'.$movieTitle.$movieYear.'</h3>';
 		//echo '<p>Summary</p>';
@@ -450,7 +446,6 @@ function makeRecenlyReleased()
 function makeNowPlaying()
 {
 	global $plex_server_ip;
-	global $plex_port;
 	global $plexToken;
 	global $plexSession; 
 	$network = getNetwork();
@@ -477,7 +472,7 @@ function makeNowPlaying()
 				// Build information for a movie
 
 				$movieArt = $mediaXML->Video['thumb'];
-				echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.':'.$plex_port . $movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
+				echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.$movieArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
 				echo '<div class="caption">';
 				$movieTitle = $mediaXML->Video['title'];
 				//echo '<h2 class="exoextralight">'.$movieTitle.'</h2>';
@@ -493,7 +488,7 @@ function makeNowPlaying()
 				//-----------------------------------------
 				file_put_contents('/tmp/tv.txt', 'tv');
 				$tvArt = $mediaXML->Video['grandparentThumb'];
-				echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.':'.$plex_port.$tvArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
+				echo '<img src="plex.php?img=' . urlencode('http://'.$plex_server_ip.$tvArt.'/all?X-Plex-Token='.$plexToken) . '" alt="...">';
 				echo '<div class="caption">';
 				$showTitle = $mediaXML->Video['grandparentTitle'];
 				$episodeTitle = $mediaXML->Video['title'];
@@ -522,10 +517,10 @@ function makeNowPlaying()
 
 function plexMovieStats()
 {
-	global $plex_port;
+
 	global $plex_server_ip;
 	global $plexToken;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
-	$plexNewestXML = simplexml_load_file('http://'.$plex_server_ip.':'.$plex_port.'/library/sections/1/all?X-Plex-Token='.$plexToken);
+	$plexNewestXML = simplexml_load_file('http://'.$plex_server_ip.'/library/sections/1/all?X-Plex-Token='.$plexToken);
 	$clientIP = get_client_ip();
 	$network = getNetwork();
 	$total_movies = count($plexNewestXML -> Video);
