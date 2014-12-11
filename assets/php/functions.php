@@ -453,7 +453,7 @@ function makeNowPlaying()
 	global $plexToken;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
 	$network = getNetwork();
 	
-	$plexSessionXML = simplexml_load_file('/tmp/TEST.XML');
+	$plexSessionXML = simplexml_load_file('/tmp/TEST.xml');
 	//-----------------------------------------
 	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
 	if (count($plexSessionXML->size) == 0):
