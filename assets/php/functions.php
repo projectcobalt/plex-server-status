@@ -455,8 +455,8 @@ function makeNowPlaying()
 	
 	$plexSessionXML = simplexml_load_file('/tmp/TEST.XML');
 	//-----------------------------------------
-	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML, FILE_APPEND);
-	if (count($plexSessionXML->Video) == 0):
+	file_put_contents('/tmp/plexSessionXML.txt', $plexSessionXML);
+	if (count($plexSessionXML->MediaContainer) == 0):
 		makeRecenlyReleased();
 	else:
 		$i = 0; // Initiate and assign a value to i & t
