@@ -2,6 +2,7 @@
 <?php
 	Ini_Set( 'display_errors', true );
 	include("functions.php");
+	include("pfsense_functions.php");
 ?>
 <html lang="en">
 	<script>
