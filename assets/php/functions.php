@@ -24,6 +24,7 @@
 	$mad_server_ip = $config['network']['mad_server_ip'];
 	$nas_server_ip = $config['network']['nas_server_ip'];
 	$pf_server_ip = $config['network']['pf_server_ip'];
+	$network = $config['network']['network'];
 	// Credentials
 	$ssh_username = $config['credentials']['ssh_username'];
 	$ssh_password = $config['credentials']['ssh_password'];
@@ -304,45 +305,45 @@ function printDiskBarGB($dup, $name = "", $dsu, $dts)
 	echo '</div>';
 }
 
-function ping()
-{
-	global $local_server_ip;
-	$clientIP = get_client_ip();
-	$pingIP = '8.8.8.8';
-	if($clientIP != $local_server_ip) {
-		$pingIP = $clientIP;
-	}
-	$terminal = shell_exec('ping -c 5 '.$pingIP);
-	$findme = 'dev =';
-	$start = strpos($terminal, $findme);
-	$avgPing = substr($terminal, ($start +13), 2);
-	return $avgPing;
-}
+#function ping()
+#{
+#	global $local_server_ip;
+#	$clientIP = get_client_ip();
+#	$pingIP = '8.8.8.8';
+#	if($clientIP != $local_server_ip) {
+#		$pingIP = $clientIP;
+#	}
+#	$terminal = shell_exec('ping -c 5 '.$pingIP);
+#	$findme = 'dev =';
+#	$start = strpos($terminal, $findme);
+#	$avgPing = substr($terminal, ($start +13), 2);
+#	return $avgPing;
+#}
 
-function getNetwork() //returns wan_domain if you are outside your network, and local_server_ip if you are within the network
-{
-	global $local_server_ip;
-	global $local_pfsense_ip;
-	global $wan_domain;
-	$clientIP = get_client_ip();
-	if(preg_match("/192.168.1.*/",$clientIP))
-		$network='http://'.$local_server_ip;
-	else
-		$network=$wan_domain;
-	return $network;
-}
+#function getNetwork() //returns wan_domain if you are outside your network, and local_server_ip if you are within the network
+#{
+#	global $local_server_ip;
+#	global $local_pfsense_ip;
+#	global $wan_domain;
+#	$clientIP = get_client_ip();
+#	if(preg_match("/192.168.1.*/",$clientIP))
+#		$network='http://'.$local_server_ip;
+#	else
+#		$network=$wan_domain;
+#	return $network;
+#}
 
-function get_client_ip() 
-{
-	if ( isset($_SERVER["REMOTE_ADDR"])) { 
-		$ipaddress = $_SERVER["REMOTE_ADDR"];
-	}else if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-		$ipaddress = $_SERVER["HTTP_X_FORWARDED_FOR"];
-	}else if (isset($_SERVER["HTTP_CLIENT_IP"])) {
-		$ipaddress = $_SERVER["HTTP_CLIENT_IP"];
-	} 
-	return $ipaddress;
-}
+#function get_client_ip() 
+#{
+#	if ( isset($_SERVER["REMOTE_ADDR"])) { 
+#		$ipaddress = $_SERVER["REMOTE_ADDR"];
+#	}else if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+#		$ipaddress = $_SERVER["HTTP_X_FORWARDED_FOR"];
+#	}else if (isset($_SERVER["HTTP_CLIENT_IP"])) {
+#		$ipaddress = $_SERVER["HTTP_CLIENT_IP"];
+#	} 
+#	return $ipaddress;
+#}
 
 function makeRecenlyPlayed()
 {
@@ -354,8 +355,8 @@ function makeRecenlyPlayed()
 	global $weather_lat;
 	global $weather_long;
 	global $weather_name;
-	$network = getNetwork();
-	$clientIP = get_client_ip();
+	global $network;
+#	$clientIP = get_client_ip();
 	$trakt_url = 'http://trakt.tv/user/mike-d/widgets/watched/all-tvthumb.jpg';
 	$traktThumb = './assets/misc/all-tvthumb.jpg';
 	$plexSessionXML = simplexml_load_file($plexSession);
@@ -396,9 +397,9 @@ function makeRecenlyReleased()
 	global $plexToken ;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
 	global $plexSession;
 	global $plexNew;
+	global $network;
 	$plexNewestXML = simplexml_load_file($plexSession);
-	$clientIP = get_client_ip();
-	$network = getNetwork();
+#	$clientIP = get_client_ip();
 	
 	echo '<div class="col-md-12">';
 	echo '<div class="thumbnail">';
@@ -462,7 +463,7 @@ function makeNowPlaying()
 	global $plex_server_ip;
 	global $plexToken;
 	global $plexSession; 
-	$network = getNetwork();
+	global $network;
 	$plexSessionXML = simplexml_load_file($plexSession);
 	if (!$plexSessionXML):
 		makeRecenlyViewed();	
@@ -536,11 +537,11 @@ function plexMovieStats()
 	global $plex_server_ip;
 	global $plexMovies;
 	global $plexToken;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
+	global $network;
 	
 	$plexNewestXML = simplexml_load_file($plexMovies);
 	
-	$clientIP = get_client_ip();
-	$network = getNetwork();
+#	$clientIP = get_client_ip();
 	$total_movies = count($plexNewestXML -> Video);
 	$hd1080 = count($plexNewestXML->xpath("Video/Media[@videoResolution='1080']/parent::*"));
 	$hd720 = count($plexNewestXML->xpath("Video/Media[@videoResolution='720']/parent::*"));
@@ -631,8 +632,8 @@ function makeRecenlyViewed()
 	global $weather_long;
 	global $weather_name;
 	global $plexSession;
-	$network = getNetwork();
-	$clientIP = get_client_ip();
+	global $network;
+#	$clientIP = get_client_ip();
 	$plexSessionXML = simplexml_load_file($plexSession);
 	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
 	$traktThumb = './assets/misc/all-tvthumb.jpg';
