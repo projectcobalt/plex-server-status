@@ -356,7 +356,7 @@
 							<div class="panel panel-default">
 							<div class="panel-heading">
 									<h4 class="panel-title exoextralight">
-										Plex library Stats
+										Plex library
 									</h4>
 									</div>	
 									<div id="plex_movie_stats"></div>
