@@ -3,7 +3,7 @@
 	Ini_Set( 'display_errors', true );
 	include("functions.php");
 	include("zfs.class.php");
-	include("nas_functions.php");
+	//include("nas_functions.php");
 ?>
 <html lang="en">
 	<script>
