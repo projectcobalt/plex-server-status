@@ -394,11 +394,10 @@ function makeRecenlyReleased()
 	global $plexNew;
 	global $network;
 	$plexNewestXML = simplexml_load_file($plexSession);
-#	$clientIP = get_client_ip();
 	
-	echo '<div class="col-md-12">';
-	echo '<div class="thumbnail">';
-	echo '<div id="carousel-example-generic" class=" carousel slide">';
+	//echo '<div class="col-md-12">';
+	//echo '<div class="thumbnail">';
+	//echo '<div id="carousel-example-generic" class=" carousel slide">';
 	//echo '<!-- Indicators -->';
 	//echo '<ol class="carousel-indicators">';
 	//echo '<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>';
