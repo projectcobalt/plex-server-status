@@ -358,7 +358,7 @@ function makeRecenlyPlayed()
 	global $network;
 #	$clientIP = get_client_ip();
 	$trakt_url = 'http://trakt.tv/user/mike-d/widgets/watched/all-tvthumb.jpg';
-	$traktThumb = './assets/misc/all-tvthumb.jpg';
+	$traktThumb = 'assets/misc/all-tvthumb.jpg';
 	$plexSessionXML = simplexml_load_file($plexSession);
 
 	echo '<div class="col-md-12">';
@@ -636,7 +636,7 @@ function makeRecenlyViewed()
 #	$clientIP = get_client_ip();
 	$plexSessionXML = simplexml_load_file($plexSession);
 	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
-	$traktThumb = './assets/misc/all-tvthumb.jpg';
+	$traktThumb = 'assets/misc/all-tvthumb.jpg';
 	echo '<div class="col-md-12">';
 	echo '<a href="http://trakt.tv/user/'.$trakt_username.'" class="thumbnail">';
 	if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
