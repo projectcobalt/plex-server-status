@@ -636,7 +636,7 @@ function makeRecenlyViewed()
 	if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
 		// Trakt image is less than 15 minutes old.
 		// Don't refresh the image, just use the file as-is.
-		echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+		echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
 	} else {
 		// Either file doesn't exist or our cache is out of date,
 		// so check if the server has different data,
@@ -644,11 +644,11 @@ function makeRecenlyViewed()
 		$thumbFromTrakt_md5 = md5_file($trakt_url);
 		$traktThumb_md5 = md5_file($traktThumb);
 		if ($thumbFromTrakt_md5 === $traktThumb_md5) {
-			echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+			echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
 		} else {
 			$thumbFromTrakt = file_get_contents($trakt_url);
 			file_put_contents($traktThumb, $thumbFromTrakt, LOCK_EX);
-			echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+			echo '<img src="'.$network.'/assets/misc/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
 		}
 	}
 	// This checks to see if you are inside your local network. If you are it gives you the forecast as well.
