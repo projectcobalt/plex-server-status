@@ -465,7 +465,9 @@ function makeNowPlaying()
 	$plexSessionXML = simplexml_load_file($plexSession);
 		#if (!$plexSessionXML):
 		#makeRecenlyViewed();
-	if (count($plexSessionXML->Video) == 0):
+	if (!$plexSessionXML):
+		makeRecenlyViewed();	
+	elseif (count($plexSessionXML->Video) == 0):
 		makeRecenlyReleased();
 	else:
 		$i = 0; // Initiate and assign a value to i & t
