@@ -390,6 +390,7 @@ function makeRecenlyPlayed()
 }
 
 function makeRecenlyReleased()
+    
 {
 	global $plex_server_ip;
 	global $plexToken ;	// You can get your Plex token using the getPlexToken() function. This will be automated once I find out how often the token has to be updated.
@@ -463,8 +464,6 @@ function makeNowPlaying()
 	global $plexSession; 
 	$network = getNetwork();
 	$plexSessionXML = simplexml_load_file($plexSession);
-		#if (!$plexSessionXML):
-		#makeRecenlyViewed();
 	if (!$plexSessionXML):
 		makeRecenlyViewed();	
 	elseif (count($plexSessionXML->Video) == 0):
@@ -623,6 +622,50 @@ function plexMovieStats()
 	echo '</table>';
 	echo '</div>';
 }
+
+function makeRecenlyViewed()
+{
+	global $local_pfsense_ip;
+	global $trakt_username;
+	global $weather_lat;
+	global $weather_long;
+	global $weather_name;
+	global $plexSession;
+	$network = getNetwork();
+	$clientIP = get_client_ip($plexSession);
+	$plexSessionXML = simplexml_load_file($);
+	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
+	$traktThumb = './assets/misc/all-tvthumb.jpg';
+	echo '<div class="col-md-12">';
+	echo '<a href="http://trakt.tv/user/'.$trakt_username.'" class="thumbnail">';
+	if (file_exists($traktThumb) && (filemtime($traktThumb) > (time() - 60 * 15))) {
+		// Trakt image is less than 15 minutes old.
+		// Don't refresh the image, just use the file as-is.
+		echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+	} else {
+		// Either file doesn't exist or our cache is out of date,
+		// so check if the server has different data,
+		// if it does, load the data from our remote server and also save it over our cache for next time.
+		$thumbFromTrakt_md5 = md5_file($trakt_url);
+		$traktThumb_md5 = md5_file($traktThumb);
+		if ($thumbFromTrakt_md5 === $traktThumb_md5) {
+			echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+		} else {
+			$thumbFromTrakt = file_get_contents($trakt_url);
+			file_put_contents($traktThumb, $thumbFromTrakt, LOCK_EX);
+			echo '<img src="'.$network.'/assets/caches/thumbnails/all-tvthumb.jpg" alt="trakt.tv" class="img-responsive"></a>';
+		}
+	}
+	// This checks to see if you are inside your local network. If you are it gives you the forecast as well.
+	if($clientIP == $local_pfsense_ip && count($plexSessionXML->Video) == 0) {
+		echo '<hr>';
+		echo '<h1 class="exoextralight" style="margin-top:5px;">';
+		echo 'Forecast</h1>';
+		echo '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat='.$weather_lat.'&lon='.$weather_long.'&name='.$weather_name.'"> </iframe>';
+	}
+	echo '</div>';
+}
+
 
 function makeBandwidthBars()
 {
