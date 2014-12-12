@@ -632,8 +632,8 @@ function makeRecenlyViewed()
 	global $weather_name;
 	global $plexSession;
 	$network = getNetwork();
-	$clientIP = get_client_ip($plexSession);
-	$plexSessionXML = simplexml_load_file($);
+	$clientIP = get_client_ip();
+	$plexSessionXML = simplexml_load_file($plexSession);
 	$trakt_url = 'http://trakt.tv/user/'.$trakt_username.'/widgets/watched/all-tvthumb.jpg';
 	$traktThumb = './assets/misc/all-tvthumb.jpg';
 	echo '<div class="col-md-12">';
