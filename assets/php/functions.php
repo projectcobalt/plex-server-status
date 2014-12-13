@@ -744,7 +744,7 @@ function makeWeatherSidebar()
     global $weather_lat;
 	global $weather_long;
 	global $forecast_api;
-	$forecastExcludes = '?exclude=daily,flags&units=si';
+	$forecastExcludes = '?exclude=daily,flags&units=ca';
 	// Kennington, London
 	$forecastLat = $weather_lat;
 	$forecastLong = $weather_long;
