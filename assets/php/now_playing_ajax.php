@@ -2,7 +2,7 @@
 	Ini_Set( 'display_errors', true );
 	include '../../init.php';
 	include 'functions.php';
-	include 'plex_functions.php';
+	#include 'plex_functions.php';
 
 	global $plex_server_ip;
 	global $plexToken;	
